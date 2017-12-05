@@ -12,9 +12,8 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "npm-run-all --parallel start-react start-image-server",
-    "start-react": "react-scripts start",
-    "start-image-server": "cd assets; http-server",
+    "start": "react-scripts start",
+    "start-image-server": "cd src/assets; http-server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

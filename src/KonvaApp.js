@@ -3,6 +3,8 @@ import { Stage } from 'react-konva';
 import { IMAGE_WIDTH, IMAGE_HEIGHT } from './common/Config';
 import ImageLayer from './ImageLayer';
 
+const ImageSources = [...new Array(9).keys()].map(key => require('./assets/400x200-' + key + '.jpeg'))
+
 const getNewLayers = () => [...new Array(9).keys()];
 const getNewImageData = () => [...new Array(100).keys()].map(stageKey => [...new Array(9).keys()].map(imageKey => ({
   opacity: Math.random(),
@@ -48,7 +50,7 @@ export default class KonvaApp extends Component {
             {this.state.layers.map(imageKey => (
               <ImageLayer
                 key={imageKey}
-                src={'http://localhost:8080/400x200-' + imageKey + '.jpeg'}
+                src={ImageSources[imageKey]}
                 imageData={this.state.imageData[stageKey][imageKey]}
               />
             ))}

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { updateLayer } from 'actions/editor';
+import { IMAGE_SOURCES } from 'common/Config';
+import LayerPreview from './LayerPreview';
 
 const getOnLayerSettingsChange = (layerId, property) => event => {
   updateLayer({ layerId, property, value: +event.target.value });
@@ -17,10 +19,10 @@ const LayerSettingsLine = ({ layerData, property, layerId }) => (
   <div>
     <Label>{property}:</Label>
     <input
-    type="number"
-    value={layerData[property]}
-    onChange={getOnLayerSettingsChange(layerId, property)}
-  />
+      type="number"
+      value={layerData[property]}
+      onChange={getOnLayerSettingsChange(layerId, property)}
+    />
   </div>
 )
 
@@ -33,6 +35,7 @@ const LayerSettingsPanel = styled.div`
 const LayerSettings = ({ layerData, layerId }) => (
   <LayerSettingsPanel>
     <div>Settings for layer {layerId}</div>
+    <LayerPreview src={IMAGE_SOURCES[layerId]} />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="opacity" />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="rotation" />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="x" />

@@ -5,6 +5,6 @@ layer is changed, it doesn't require the whole canvas to be re-rendered. This is
 on-the-fly complex image processing, especially filtering.
 
 ## Demo
-![](https://youtu.be/kyNBX6joSlg)
+[1](https://youtu.be/kyNBX6joSlg)
 
-![](https://youtu.be/ypWWe4d9DEA)
+[2](https://youtu.be/ypWWe4d9DEA)

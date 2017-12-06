@@ -5,6 +5,17 @@ import { updateLayer } from 'actions/editor';
 import { IMAGE_SOURCES } from 'common/Config';
 import LayerPreview from './LayerPreview';
 
+const STEPS = {
+  opacity: 0.1,
+  rotation: 10,
+  x: 10,
+  y: 10,
+  scaleX: 0.1,
+  scaleY: 0.1,
+  skewX: 0.1,
+  skewY: 0.1,
+};
+
 const getOnLayerSettingsChange = (layerId, property) => event => {
   updateLayer({ layerId, property, value: +event.target.value });
 };
@@ -22,6 +33,7 @@ const LayerSettingsLine = ({ layerData, property, layerId }) => (
       type="number"
       value={layerData[property]}
       onChange={getOnLayerSettingsChange(layerId, property)}
+      step={STEPS[property] || 1}
     />
   </div>
 )

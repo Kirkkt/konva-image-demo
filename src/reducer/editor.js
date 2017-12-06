@@ -5,8 +5,8 @@ const generateNewDefaultLayer = layerId => ({
   rotation: 0,
   x: 0,
   y: 0,
-  scaleX: 0,
-  scaleY: 0,
+  scaleX: 1,
+  scaleY: 1,
   skewX: 0,
   skewY: 0,
 })

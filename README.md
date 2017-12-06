@@ -3,3 +3,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Konva.js renders images as a layer in canvas, and it treat each layer individually, meaning if one
 layer is changed, it doesn't require the whole canvas to be re-rendered. This is great for
 on-the-fly complex image processing, especially filtering.
+
+## Demo
+![](single-stage-editor.ogv)
+
+![](stress-test.ogv)

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Stage } from 'react-konva';
-import { IMAGE_WIDTH, IMAGE_HEIGHT, LAYERS, STAGES, IMAGE_SOURCES } from 'common/Config';
+import { IMAGE_WIDTH, IMAGE_HEIGHT, LAYERS, IMAGE_SOURCES } from 'common/Config';
 import ImageLayer from 'common/ImageLayer';
 
 const getNewLayers = () => [...new Array(LAYERS).keys()];
-const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...new Array(LAYERS).keys()].map(imageKey => ({
+const getNewImageData = () => [...new Array(LAYERS).keys()].map(imageKey => ({
   opacity: Math.random(),
   rotation: 360 * Math.random(),
   x: IMAGE_WIDTH * (.2 * Math.random() - .1),
@@ -13,9 +13,9 @@ const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...
   scaleY: .7 + .6 * Math.random(),
   skewX: Math.random(),
   skewY: Math.random(),
-}))) ;
+}));
 
-export default class StressTest extends Component {
+export default class Editor extends Component {
   state = {
     layers: getNewLayers(),
     imageData: getNewImageData(),
@@ -45,17 +45,15 @@ export default class StressTest extends Component {
           <h1>change one layer</h1>
         </button>
         </div>
-        {[...new Array(STAGES).keys()].map(stageKey => (
-          <Stage style={{display: 'inline-block'}} key={stageKey} width={IMAGE_WIDTH} height={IMAGE_HEIGHT}>
-            {this.state.layers.map(imageKey => (
-              <ImageLayer
-                key={imageKey}
-                src={IMAGE_SOURCES[imageKey]}
-                imageData={this.state.imageData[stageKey][imageKey]}
-              />
-            ))}
-          </Stage>
-        ))}
+        <Stage style={{display: 'inline-block'}} width={IMAGE_WIDTH} height={IMAGE_HEIGHT}>
+          {this.state.layers.map(imageKey => (
+            <ImageLayer
+              key={imageKey}
+              src={IMAGE_SOURCES[imageKey]}
+              imageData={this.state.imageData[imageKey]}
+            />
+          ))}
+        </Stage>
       </div>
     );
   }

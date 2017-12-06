@@ -13,6 +13,8 @@ const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...
   y: IMAGE_HEIGHT * (.2 * Math.random() - .1),
   scaleX: .9 + .2 * Math.random(),
   scaleY: .7 + .6 * Math.random(),
+  skewX: Math.random(),
+  skewY: Math.random(),
 }))) ;
 
 export default class StressTest extends Component {

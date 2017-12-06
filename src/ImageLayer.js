@@ -27,6 +27,8 @@ export default class ImageLayer extends Component {
           y={this.props.imageData.y}
           scaleX={this.props.imageData.scaleX}
           scaleY={this.props.imageData.scaleY}
+          skewX={this.props.imageData.skewX}
+          skewY={this.props.imageData.skewY}
         />
       </Layer>
     )

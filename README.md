@@ -5,6 +5,6 @@ layer is changed, it doesn't require the whole canvas to be re-rendered. This is
 on-the-fly complex image processing, especially filtering.
 
 ## Demo
-![](single-stage-editor.ogv)
+![](https://youtu.be/kyNBX6joSlg)
 
-![](stress-test.ogv)
+![](https://youtu.be/ypWWe4d9DEA)

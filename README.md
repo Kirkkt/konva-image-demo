@@ -4,7 +4,7 @@ Konva.js renders images as a layer in canvas, and it treat each layer individual
 layer is changed, it doesn't require the whole canvas to be re-rendered. This is great for
 on-the-fly complex image processing, especially filtering.
 
-## Demo
+## Screen recording
 [single stage editor](https://youtu.be/kyNBX6joSlg)
 
 [stress test](https://youtu.be/ypWWe4d9DEA)

@@ -15,7 +15,7 @@ const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...
   scaleY: .7 + .6 * Math.random(),
 }))) ;
 
-export default class KonvaApp extends Component {
+export default class StressTest extends Component {
   state = {
     layers: getNewLayers(),
     imageData: getNewImageData(),

@@ -9,17 +9,21 @@ const genImage = src => new Promise((resolve) => {
 });
 /* to be fetched from API */
 const flatPreviewData = {
-    opacity: 0.5,
+    opacity: 0.7,
     scaleX: 0.25,
     scaleY: 0.25,
 };
 const MAGIC_Y_FACTOR = 62
 const PIXEL_TO_MM_RATIO = 1.486
 export default class FlatPreview extends Component {
-    state = {
-        userImages: [],
-        designDetails : null, /* should be used to calculate PIXEL_TO_MM_RATIO dynamically*/
+    constructor(params){
+        super(params)
+        this.state = {
+            userImages: [],
+            designDetails : null, /* should be used to calculate PIXEL_TO_MM_RATIO dynamically*/
+        }
     }
+
 
     componentDidMount() {
         this.props.srcs.map(src => {
@@ -35,11 +39,13 @@ export default class FlatPreview extends Component {
 
     render() {
         return (
+
                 <Group>
                     {this.props.imagesDiameters.map((diameters, i) => {
+                        if(typeof this.state.userImages[i] === 'object' ){
                         let crop = {
-                            x:0,
-                            y:0,
+                            x:10,
+                            y:10,
                             height:20,
                             width:20
                         }/*@fixme passing crop to image makes images dark insteadof cropping them */
@@ -49,9 +55,8 @@ export default class FlatPreview extends Component {
                             opacity={flatPreviewData.opacity}
                             x={diameters.x * PIXEL_TO_MM_RATIO}
                             y={(diameters.y * PIXEL_TO_MM_RATIO - diameters.height * PIXEL_TO_MM_RATIO ) - MAGIC_Y_FACTOR }
-                            scaleX={flatPreviewData.scaleX}
-                            scaleY={flatPreviewData.scaleY}
-                        />
+
+                        />}
                     })}
                 </Group>
         )

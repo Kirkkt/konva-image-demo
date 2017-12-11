@@ -10,6 +10,8 @@ const genImage = src => new Promise((resolve) => {
     image.onload = () => resolve(image)
 })
 
+const fakeAPIResponse = {"errorCode":0,"error":"","response":{"external_id":"8GlGeu7O9WU","width":"218.00","height":"305.00","images":[{"width":"60.84","height":"106.72","x":"15.62","y":"181.84"},{"width":"61.82","height":"106.72","x":"77.11","y":"164.27"},{"width":"61.17","height":"107.05","x":"140.89","y":"181.84"}]}}
+
 export default class FlatPreview extends Component {
 
     constructor(props){
@@ -18,21 +20,24 @@ export default class FlatPreview extends Component {
             backgroundImage: null,
             foregroundImage: null,
             userImages: null,
-            designDetails: null,
+            designDetails: fakeAPIResponse.response, //@fixme set null to use api
         };
         this.getUserPhotosDiameters();
+        this.updateLayers(); //@fixme delete to use api
     }
 
     getUserPhotosDiameters() {
-        $.getJSON(PREVIEW_DETAILS_ENDPOINT + this.props.designId)
-            .then((results) => {
-                this.setState({ designDetails: results.response })
-                this.updateLayers()
-            });
+        //@fixme uncomment to use api
+        // $.getJSON(PREVIEW_DETAILS_ENDPOINT + this.props.designId)
+        //     .then((results) => {
+        //         this.setState({ designDetails: results.response })
+        //         this.updateLayers()
+        //     });
+
+
     }
 
     updateLayers() {
-        console.log(DESIGN_LAYER_STORAGE_BASE_URL + this.state.designDetails.external_id + DESIGN_LAYER_BACKGROUND_PARAMETER_NAME)
         genImage(DESIGN_LAYER_STORAGE_BASE_URL + this.state.designDetails.external_id + DESIGN_LAYER_BACKGROUND_PARAMETER_NAME)
             .then(backgroundImage => this.setState({ backgroundImage }))
         genImage(DESIGN_LAYER_STORAGE_BASE_URL + this.state.designDetails.external_id + DESIGN_LAYER_FOREGROUND_PARAMETER_NAME)

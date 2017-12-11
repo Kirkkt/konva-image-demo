@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { updateLayer } from 'actions/editor';
-import { IMAGE_SOURCES } from 'common/Config';
+import { IMAGE_SOURCES, IMAGE_HEIGHT, IMAGE_WIDTH } from 'common/Config';
 import LayerPreview from './LayerPreview';
 
 const STEPS = {
@@ -12,6 +12,10 @@ const STEPS = {
   y: 10,
   scaleX: 0.1,
   scaleY: 0.1,
+  cropX: 10,
+  cropY: 10,
+  cropWidth: 10,
+  cropHeight: 10,
   skewX: 0.1,
   skewY: 0.1,
 };
@@ -34,6 +38,7 @@ const LayerSettingsLine = ({ layerData, property, layerId }) => (
       value={layerData[property]}
       onChange={getOnLayerSettingsChange(layerId, property)}
       step={STEPS[property] || 1}
+      style={{ width: 116 }}
     />
   </div>
 )
@@ -54,6 +59,10 @@ const LayerSettings = ({ layerData, layerId }) => (
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="y" />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="scaleX" />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="scaleY" />
+    <LayerSettingsLine layerData={layerData} layerId={layerId} property="cropX" />
+    <LayerSettingsLine layerData={layerData} layerId={layerId} property="cropY" />
+    <LayerSettingsLine layerData={layerData} layerId={layerId} property="cropWidth" />
+    <LayerSettingsLine layerData={layerData} layerId={layerId} property="cropHeight" />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="skewX" />
     <LayerSettingsLine layerData={layerData} layerId={layerId} property="skewY" />
   </LayerSettingsPanel>

@@ -1,4 +1,4 @@
-import { IMAGE_SOURCES } from 'common/Config';
+import { IMAGE_SOURCES, IMAGE_HEIGHT, IMAGE_WIDTH } from 'common/Config';
 
 const generateNewDefaultLayer = layerId => ({
   opacity: 1,
@@ -7,6 +7,10 @@ const generateNewDefaultLayer = layerId => ({
   y: 0,
   scaleX: 1,
   scaleY: 1,
+  cropX: 0,
+  cropY: 0,
+  cropWidth: IMAGE_WIDTH,
+  cropHeight: IMAGE_HEIGHT,
   skewX: 0,
   skewY: 0,
 })

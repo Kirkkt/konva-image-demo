@@ -11,6 +11,10 @@ const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...
   y: IMAGE_HEIGHT * (.2 * Math.random() - .1),
   scaleX: .9 + .2 * Math.random(),
   scaleY: .7 + .6 * Math.random(),
+  cropX: (.2 * Math.random() - .1) * IMAGE_WIDTH,
+  cropY: (.6 * Math.random() - .1) * IMAGE_HEIGHT,
+  cropWidth: (.9 + .2 * Math.random()) * IMAGE_WIDTH,
+  cropHeight: (.7 + .6 * Math.random()) * IMAGE_HEIGHT,
   skewX: Math.random(),
   skewY: Math.random(),
 }))) ;

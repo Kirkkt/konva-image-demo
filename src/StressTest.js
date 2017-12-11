@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Stage } from 'react-konva';
 import { IMAGE_WIDTH, IMAGE_HEIGHT, LAYERS, STAGES, PREVIEW_HEIGHT, PREVIEW_WIDTH, IMAGE_SOURCES } from './common/Config';
-import ImageLayer from './ImageLayer';
+import ImageLayer from './common/ImageLayer';
 import FlatPreview from './FlatPreview';
 
 const ImageSources = [...new Array(LAYERS).keys()].map(key => require('./assets/400x200-' + key + '.jpeg'))

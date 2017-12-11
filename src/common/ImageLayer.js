@@ -27,6 +27,14 @@ export default class ImageLayer extends Component {
           y={this.props.imageData.y}
           scaleX={this.props.imageData.scaleX}
           scaleY={this.props.imageData.scaleY}
+          crop={{
+            x: this.props.imageData.cropX,
+            y: this.props.imageData.cropY,
+            width: this.props.imageData.cropWidth,
+            height: this.props.imageData.cropHeight,
+          }}
+          skewX={this.props.imageData.skewX}
+          skewY={this.props.imageData.skewY}
         />
       </Layer>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Stage } from 'react-konva';
-import { IMAGE_WIDTH, IMAGE_HEIGHT, LAYERS, STAGES, PREVIEW_HEIGHT, PREVIEW_WIDTH } from './common/Config';
+import { IMAGE_WIDTH, IMAGE_HEIGHT, LAYERS, STAGES, PREVIEW_HEIGHT, PREVIEW_WIDTH, IMAGE_SOURCES } from './common/Config';
 import ImageLayer from './ImageLayer';
 import FlatPreview from './FlatPreview';
 
@@ -14,6 +14,12 @@ const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...
   y: IMAGE_HEIGHT * (.2 * Math.random() - .1),
   scaleX: .9 + .2 * Math.random(),
   scaleY: .7 + .6 * Math.random(),
+  cropX: (.2 * Math.random() - .1) * IMAGE_WIDTH,
+  cropY: (.6 * Math.random() - .1) * IMAGE_HEIGHT,
+  cropWidth: (.9 + .2 * Math.random()) * IMAGE_WIDTH,
+  cropHeight: (.7 + .6 * Math.random()) * IMAGE_HEIGHT,
+  skewX: Math.random(),
+  skewY: Math.random(),
 }))) ;
 
 const flatPreviewData = {
@@ -35,7 +41,7 @@ const flatPreviewSrc = {
 
 const sampleDesignId = 858542
 
-export default class KonvaApp extends Component {
+export default class StressTest extends Component {
   state = {
     layers: getNewLayers(),
     imageData: getNewImageData(),
@@ -89,7 +95,7 @@ export default class KonvaApp extends Component {
             {this.state.layers.map(imageKey => (
               <ImageLayer
                 key={imageKey}
-                src={ImageSources[imageKey]}
+                src={IMAGE_SOURCES[imageKey]}
                 imageData={this.state.imageData[stageKey][imageKey]}
               />
             ))}

@@ -10,7 +10,8 @@ const genImage = src => new Promise((resolve) => {
     image.onload = () => resolve(image)
 })
 
-const fakeAPIResponse = {"errorCode":0,"error":"","response":{"external_id":"8GlGeu7O9WU","width":"218.00","height":"305.00","images":[{"width":"60.84","height":"106.72","x":"15.62","y":"181.84"},{"width":"61.82","height":"106.72","x":"77.11","y":"164.27"},{"width":"61.17","height":"107.05","x":"140.89","y":"181.84"}]}}
+const fakeAPIResponse = {"errorCode":0,"error":"","response":{"external_id":"8GlGeu7O9WU","width":"156.00","height":"113.00","images":[{"width":"43.11","height":"75.44","x":"100.475","y":"25.38"},{"width":"43.57","height":"75.21","x":"55.525","y":"12.995"},{"width":"42.88","height":"75.21","x":"12.19","y":"25.385"}]}}
+const fakeAPIResponse2 = {"errorCode":0,"error":"","response":{"external_id":"fFcQ-6xRrmg","width":"113.00","height":"156.00","images":[{"width":"41.38","height":"44.88","x":"56.91","y":"62.54"},{"width":"43.24","height":"45.5","x":"13.47","y":"61.92"},{"width":"41.59","height":"43.85","x":"56.915","y":"17.035"},{"width":"42","height":"44.27","x":"14.3","y":"17.035"}]}}
 
 export default class FlatPreview extends Component {
 
@@ -44,8 +45,18 @@ export default class FlatPreview extends Component {
             .then(foregroundImage => this.setState({ foregroundImage }))
     }
 
+    calculatePixelXRatio() {
+        return this.state.foregroundImage.naturalWidth / this.state.designDetails.width;
+
+    }
+    calculatePixelYRatio() {
+        return this.state.foregroundImage.naturalHeight / this.state.designDetails.height;
+    }
+
     render() {
-        if(!this.state.designDetails) return null;
+        if(!this.state.designDetails || !this.state.foregroundImage) return null;
+        let ratioX = this.calculatePixelXRatio();
+        let ratioY = this.calculatePixelYRatio();
         return (
             <Layer>
                 <Image
@@ -61,11 +72,14 @@ export default class FlatPreview extends Component {
                     srcs = {this.props.src.userImages}
                     imagesDiameters ={this.state.designDetails.images}
                     designDetails ={{width: this.state.designDetails.width, height: this.state.designDetails.height}}
+                    pixelToMMXRatio={ratioX}
+                    pixelToMMYRatio={ratioY}
+                    previewDimmensions={{width: this.state.foregroundImage.naturalWidth, height: this.state.foregroundImage.naturalHeight }}
                 />
                 <Image
                     visible={true}
                     image={this.state.foregroundImage}
-                    opacity={1}
+                    opacity={this.props.imageData.opacity}
                     x={this.props.imageData.x}
                     y={this.props.imageData.y}
                     scaleX={this.props.imageData.scaleX}

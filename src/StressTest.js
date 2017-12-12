@@ -23,7 +23,7 @@ const getNewImageData = () => [...new Array(STAGES).keys()].map(stageKey => [...
 }))) ;
 
 const flatPreviewData = {
-  opacity: 0.5,
+  opacity: 1,
   rotation: 0,
   x: 0,
   y: 0,
@@ -36,10 +36,11 @@ const flatPreviewSrc = {
     require('./assets/user_images/1.jpg'),
     require('./assets/user_images/2.jpg'),
     require('./assets/user_images/3.jpg'),
+    require('./assets/user_images/4.jpg'),
   ],
 };
 
-const sampleDesignId = 858542
+const sampleDesignIds = [858535, 854810];
 
 export default class StressTest extends Component {
   state = {
@@ -52,22 +53,16 @@ export default class StressTest extends Component {
     return (
       <div>
         <h1>Flat preview</h1>
-        <Stage style={{display: 'inline-block'}} key="randomkey2" width={PREVIEW_WIDTH} height={PREVIEW_HEIGHT}>
-          <FlatPreview
-              key={"randomkey"}
-              src={flatPreviewSrc}
-              imageData={this.state.flatPreviewData}
-              designId={sampleDesignId}
-          />
-        </Stage>
-        <Stage style={{display: 'inline-block'}} key="randomkey3" width={PREVIEW_WIDTH} height={PREVIEW_HEIGHT}>
-          <FlatPreview
-              key={"randomkey"}
-              src={flatPreviewSrc}
-              imageData={this.state.flatPreviewData}
-              designId={sampleDesignId}
-          />
-        </Stage>
+        {sampleDesignIds.map((design,i)=>{
+          return <Stage style={{display: 'inline-block'}} key={"randomkey"+(i+20)} width={PREVIEW_WIDTH} height={PREVIEW_HEIGHT}>
+            <FlatPreview
+                key={"randomkey"}
+                src={flatPreviewSrc}
+                imageData={this.state.flatPreviewData}
+                designId={design}
+            />
+          </Stage>
+        })}
         <div>
         <button onClick={
           () => {

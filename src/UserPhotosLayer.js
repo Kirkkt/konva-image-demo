@@ -9,12 +9,9 @@ const genImage = src => new Promise((resolve) => {
 });
 /* to be fetched from API */
 const flatPreviewData = {
-    opacity: 0.7,
-    scaleX: 0.25,
-    scaleY: 0.25,
+    opacity: 1,
 };
-const MAGIC_Y_FACTOR = 62
-const PIXEL_TO_MM_RATIO = 1.486
+
 export default class FlatPreview extends Component {
     constructor(params){
         super(params)
@@ -22,6 +19,7 @@ export default class FlatPreview extends Component {
             userImages: [],
             designDetails : null, /* should be used to calculate PIXEL_TO_MM_RATIO dynamically*/
         }
+        console.log(this.props.pixelToMMRatio)
     }
 
 
@@ -39,24 +37,27 @@ export default class FlatPreview extends Component {
 
     render() {
         return (
-
                 <Group>
                     {this.props.imagesDiameters.map((diameters, i) => {
-                        if(typeof this.state.userImages[i] === 'object' ){
+                        if(typeof this.state.userImages[i] === 'object'  ){
+                            const image = this.state.userImages[i];
                         let crop = {
-                            x:10,
+                            x:image.naturalWidth / 4,
                             y:10,
-                            height:20,
-                            width:20
-                        }/*@fixme passing crop to image makes images dark insteadof cropping them */
-                        return <Image
+                            height: image.naturalHeight,
+                            width:image.naturalWidth / 2
+                        }
+                        return (<Image
                             visible={true}
                             image={this.state.userImages[i]}
                             opacity={flatPreviewData.opacity}
-                            x={diameters.x * PIXEL_TO_MM_RATIO}
-                            y={(diameters.y * PIXEL_TO_MM_RATIO - diameters.height * PIXEL_TO_MM_RATIO ) - MAGIC_Y_FACTOR }
-
-                        />}
+                            x={diameters.x * this.props.pixelToMMXRatio}
+                            y={diameters.y * this.props.pixelToMMYRatio}
+                            scaleX={(diameters.width * this.props.pixelToMMYRatio)/image.naturalWidth}
+                            scaleY={(diameters.height * this.props.pixelToMMYRatio)/image.naturalHeight}
+                            crop={crop}
+                        />)
+                           }
                     })}
                 </Group>
         )
